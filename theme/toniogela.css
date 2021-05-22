@@ -1,0 +1,38 @@
+/*!
+ * @theme toniogela
+ * @author toniogela
+ *
+ * @auto-scaling fittingHeader,math
+ * @size 16:9 1280px 720px
+ */
+/*
+  If you want you can use 1920px 1080px as size to fit more text in slides
+  If you add ",code" to autoscaling code will scale too, but results are 
+  strange so use it with care
+*/
+@import-theme "uncover";
+:root {
+  /* Slide color */
+  --color-background: #255C46 !important;
+  /* Code snippet background color */
+  /* --color-background-code: transparent !important; */
+  --color-background-paginate: transparent !important;
+  /* Text color */
+  --color-foreground: #F2E3D1 !important;
+  /* Color for links */
+  --color-highlight: #FBCB4A !important;
+  --color-highlight-hover: #FBCB4A !important;
+  /* Bold text color */
+  --color-highlight-heading: #FBCB4A !important;
+  /* Header and footer */
+  --color-header: #F2E3D1 !important;
+  --color-header-shadow: transparent !important;
+}
+
+section strong {
+  color: var(--color-highlight-heading);
+  font-weight: strong;
+}
+section a:hover {
+  text-decoration: none;
+}

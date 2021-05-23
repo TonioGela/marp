@@ -18,6 +18,9 @@ The repository contains a `justfile` for [just](https://github.com/casey/just). 
 
 [slides.md](./slides.md) and [toniogela.scss](./theme/toniogela.scss) should contain all customization instructions
 
+### Graphs
+Cool graphs can be drawn using [Asciiflow](https://asciiflow.com/#/) and [converted to images](https://shaky.github.bushong.net/)
+
 ## Vscode
 
 To use [the preview feature of vscode](https://github.com/marp-team/marp-vscode#preview-marp-markdown) set the following properties:

@@ -1,5 +1,7 @@
 # Marp Presentations Template
 
+![example](./images/example.png)
+
 ## Instructions
 This template requires [marp](https://marp.app/) to be installed to be built.
 `npm install -g @marp-team/marp-cli` or `brew install marp-cli`
@@ -7,7 +9,10 @@ This template requires [marp](https://marp.app/) to be installed to be built.
 The file `toniogela.scss` should be compiled to css using [sass](https://sass-lang.com/install) with `sass --no-source-map toniogela.scss:toniogela.css`.
 The repository already contains compiled version for ease. The theme contains just a few overrides over the default [uncover](https://github.com/marp-team/marp-core/blob/main/themes/uncover.scss) theme, that is heavily inspired by [reveal.js](https://revealjs.com/), tool that I often use in its [reveal-md](https://github.com/webpro/reveal-md) form.
 
-You can build the presentation using `marp --html true --theme-set ./toniogela.css -- slides.md`.
+You can build the presentation using `marp --html true --theme-set ./theme/toniogela.css -- slides.md`.
+
+### justfile
+The repository contains a `justfile` for [just](https://github.com/casey/just). You can see the list of recipres using `just --list`, but the idea is that you can build the presentation using `just build`
 
 ## Customization
 
@@ -30,3 +35,6 @@ The [Marp Github discussions](https://github.com/marp-team/marp/discussions) are
 For the list of emojis see [here](https://github.com/markdown-it/markdown-it-emoji/blob/2.0.0/lib/data/full.json)
 
 For a comparison with Deckset see [here](https://github.com/marp-team/marp/discussions/68)
+
+# TODO
+Add CI and autodeploy on Netlify

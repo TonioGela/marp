@@ -46,11 +46,11 @@
   --color-header-shadow: transparent !important; 
 }
 
-  section {
-    strong {
-        color: var(--color-highlight-heading);
-        font-weight: strong;
-    }
-    a:hover {text-decoration: none;}
+section {
+  font-family: 'Ostrich Sans Heavy', sans-serif;
+  strong {
+      color: var(--color-highlight-heading);
+      font-weight: strong;
   }
-  
+  a:hover {text-decoration: none;}
+}

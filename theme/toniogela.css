@@ -29,6 +29,9 @@
   --color-header-shadow: transparent !important;
 }
 
+section {
+  font-family: "Ostrich Sans Heavy", sans-serif;
+}
 section strong {
   color: var(--color-highlight-heading);
   font-weight: strong;

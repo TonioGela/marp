@@ -9,6 +9,7 @@ brew install marp-cli
 (Optionally)
 brew install sass/sass/sass
 brew install just
+brew install monolith
 ```
 
 On Linux
@@ -17,6 +18,7 @@ npm install -g @marp-team/marp-cli
 (Optionally)
 npm install -g sass
 cargo install just
+cargo install monolith
 ```
 
 ## Instructions
@@ -38,6 +40,13 @@ The repository contains a `justfile` for [just](https://github.com/casey/just). 
 ### Graphs
 Cool graphs can be drawn using [Asciiflow](https://asciiflow.com/#/) and [converted to images](https://shaky.github.bushong.net/)
 
+## Bundling
+To bundle the whole presentation as a file you can use [monolith](https://github.com/Y2Z/monolith) (or `just deploy` if you're using just).
+
+Sadly marp generates some selectors that are using a CSS hack for IE 9 that monolith doesn't detect (see [here](https://github.com/Y2Z/monolith/issues/258) for info) so it's necessary to use `sed` to modify the output file.
+
+The syntax for sed in-place is `sed -i 's/<x>/<y>/g' <file>` on linux while `sed -i '' 's/<x>/<y>/g' <file>` on MacOsX. In the justfile you find `sed -i 's/:not()/:not(\\9)/g' index.html` since I personally aliased `gsed` installable via `brew install gnu-sed` to `sed`.
+
 ## Vscode
 
 To use [the preview feature of vscode](https://github.com/marp-team/marp-vscode#preview-marp-markdown) set the following properties:
@@ -56,5 +65,7 @@ For the list of emojis see [here](https://github.com/markdown-it/markdown-it-emo
 
 For a comparison with Deckset see [here](https://github.com/marp-team/marp/discussions/68)
 
-# TODO
-Add CI and autodeploy on Netlify
+# TODO (Contributors are welcome)
+Add CI and autodeploy on Netlify, maybe using [action-netlify-deploy](https://github.com/South-Paw/action-netlify-deploy#deploying-drafts-on-each-commit-and-publishing-on-push-to-master)
+
+[Runners](https://github.com/TonioGela/base.g8/settings/actions/runners) are a good fit? Probably not but [Custom Docker Images](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action)? Maybe built with [this rationale](https://www.lpalmieri.com/posts/fast-rust-docker-builds/) i.e. keeping the image as small as possible?

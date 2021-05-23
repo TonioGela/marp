@@ -2,6 +2,23 @@
 
 ![example](./images/example.png)
 
+## Prerequisites
+On MacOsX
+```
+brew install marp-cli
+(Optionally)
+brew install sass/sass/sass
+brew install just
+```
+
+On Linux
+```
+npm install -g @marp-team/marp-cli
+(Optionally)
+npm install -g sass
+cargo install just
+```
+
 ## Instructions
 This template requires [marp](https://marp.app/) to be installed to be built.
 `npm install -g @marp-team/marp-cli` or `brew install marp-cli`

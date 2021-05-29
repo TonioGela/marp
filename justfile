@@ -13,6 +13,10 @@ pdf:
 theme:
     sass --no-source-map theme/toniogela.scss:theme/toniogela.css
 
+# removes temp files
+clean:
+    rm -f slides.html index.html
+
 # creates a single self contained index.html file
 deploy: build
     monolith slides.html -o index.html &> /dev/null

@@ -1,6 +1,8 @@
 # TonioGela's Marp Slides Template
 
-Slides template to use with [marp-cli], a handy Markdown to Slides tool
+Slides template and them to be used with [marp-cli], a handy "Markdown to slides" tool that features a presenter's view.
+
+This theme reflects the one built for [my blog](https://toniogela.dev).
 
 ![example](./images/example.png)
 
@@ -12,7 +14,11 @@ Slides template to use with [marp-cli], a handy Markdown to Slides tool
 
 ## Instructions
 
-To write your presentation, create a repository using this template and fill the `slides.md` file with your content. You may want to take a look at the [Marpit Markdown](https://marpit.marp.app/markdown) features.
+To write your presentation, create a repository using this template and then:
+- Remove the useless `images/example.png` and `README.md`
+- Fill the `slides.md` file with your content
+
+You may want to take a look at the many [Marpit Markdown](https://marpit.marp.app/markdown) features.
 
 The deck of slides can then be built with:
 - `marp --html true --theme-set ./theme/toniogela.css -- slides.md`
@@ -21,7 +27,13 @@ The deck of slides can then be built with:
 
 ## Deploy your slides with GH Actions
 
-//TODO!
+A custom GH action to easily deploy the deckset is included.
+
+This action is built to support a single `slides.md` file and a single `images` folder as the only sources for the presentation. It should be difficult to customise if you have different needs.
+
+Once the repository gets created wait for the CI to complete at least once and then under [Settings > Pages](/settings/pages) select `Deploy from a Branch` under `Source` and pick the newly created `gh-pages` `/(root)`.
+
+If you're using a custom domain you'll need to modify the [cname in the workflow file](./.github/workflows/pages.yml#L41) and setup a corresponding `CNAME` DNS record on your domain to point to `<your-username>.github.io`.
 
 ## Customising the theme
 [slides.md](./slides.md) and [toniogela.scss](./theme/toniogela.scss) should contain all customization instructions. The theme consists of just a few overrides over the default [uncover](https://github.com/marp-team/marp-core/blob/main/themes/uncover.scss) theme and customises the code highlight.
@@ -51,9 +63,9 @@ To use [the preview feature of VSCode](https://github.com/marp-team/marp-vscode#
 note that a [settings.json](.vscode/settings.json) is committed into the repo for ease.
 
 ## Other
-The [Marp Github discussions](https://github.com/marp-team/marp/discussions) are the best place for info.
+The [Marp Github discussions](https://github.com/marp-team/marp/discussions) are really useful in case of doubts.
 
-For the list of emojis see [here](https://github.com/markdown-it/markdown-it-emoji/blob/3.0.0/lib/data/full.mjs)
+A list of supported emojis can be found [here](https://github.com/markdown-it/markdown-it-emoji/blob/3.0.0/lib/data/full.mjs).
 
 [marp-cli]: https://github.com/marp-team/marp-cli
 [monolith]: https://github.com/Y2Z/monolith

@@ -1,0 +1,41 @@
+name: Deploy to Gh Pages
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Copy images folder
+        run: |
+          if [[ -d images ]]; then
+            mkdir -p static
+            cp -R images static/images
+          fi
+
+      - name: Build slides.md
+        uses: docker://marpteam/marp-cli:v3.0.2
+        with:
+          args: --output static/index.html slides.md
+        env:
+          MARP_USER: root:root
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./static
+          cname: slides.toniogela.dev

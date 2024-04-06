@@ -3,39 +3,165 @@
  * @author toniogela
  *
  * @auto-scaling fittingHeader,math
- * @size 16:9 1280px 720px
+ * @size 16:9 1920px 1080px
  */
 /*
   If you want you can use 1920px 1080px as size to fit more text in slides
   If you add ",code" to autoscaling code will scale too, but results are 
   strange so use it with care
 */
+/* purposely do not highlight these things */
+.hljs-comment {
+  color: #65737e;
+}
+
+.hljs-tag {
+  color: #a7adba;
+}
+
+.hljs-subst,
+.hljs-punctuation,
+.hljs-operator {
+  color: #c0c5ce;
+}
+
+.hljs-operator {
+  opacity: 0.7;
+}
+
+.hljs-bullet,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-deletion {
+  color: #bf616a;
+}
+
+.hljs-symbol,
+.hljs-number,
+.hljs-link,
+.hljs-attr,
+.hljs-variable.constant_,
+.hljs-literal {
+  color: #d08770;
+}
+
+.hljs-type,
+.hljs-title,
+.hljs-class .hljs-title,
+.hljs-title.class_ {
+  color: #ebcb8b;
+}
+
+.hljs-strong {
+  font-weight: bold;
+  color: #ebcb8b;
+}
+
+.hljs-code,
+.hljs-addition,
+.hljs-title.class_.inherited__,
+.hljs-string {
+  color: #a3be8c;
+}
+
+.hljs-built_in,
+.hljs-doctag,
+.hljs-quote,
+.hljs-keyword.hljs-atrule,
+.hljs-regexp {
+  color: #96b5b4;
+}
+
+.hljs-function .hljs-title,
+.hljs-attribute,
+.ruby .hljs-property,
+.hljs-title.function_,
+.hljs-section {
+  color: #8fa1b3;
+}
+
+.hljs-template-tag,
+.diff .hljs-meta,
+.hljs-keyword {
+  color: #b48ead;
+}
+
+.hljs-emphasis {
+  color: #b48ead;
+  font-style: italic;
+}
+
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-meta .hljs-string {
+  color: #ab7967;
+}
+
+/* for v10 compatible themes */
+.hljs-meta .hljs-keyword,
+.hljs-meta-keyword {
+  font-weight: bold;
+}
+
 @import-theme "uncover";
 :root {
   /* Slide color */
-  --color-background: #255C46 !important;
+  --color-background: #1a2539 !important;
   /* Code snippet background color */
-  /* --color-background-code: transparent !important; */
+  --color-background-code: #2b303b !important;
+  --color-inlinecode: #a3be8c;
   --color-background-paginate: transparent !important;
   /* Text color */
-  --color-foreground: #F2E3D1 !important;
+  --color-foreground: #e0e0e0 !important;
   /* Color for links */
-  --color-highlight: #FBCB4A !important;
-  --color-highlight-hover: #FBCB4A !important;
+  --color-highlight: #a53f2b !important;
+  --color-highlight-italic: #a3be8c !important;
+  --color-highlight-hover: #a53f2b !important;
   /* Bold text color */
-  --color-highlight-heading: #FBCB4A !important;
+  --color-highlight-heading: #a53f2b !important;
   /* Header and footer */
-  --color-header: #F2E3D1 !important;
+  --color-header: #e0e0e0 !important;
   --color-header-shadow: transparent !important;
 }
 
+em {
+  font-style: normal !important;
+  color: var(--color-highlight-italic) !important;
+}
+
 section {
-  font-family: "Ostrich Sans Heavy", sans-serif;
+  font-family: sans-serif;
 }
 section strong {
   color: var(--color-highlight-heading);
   font-weight: strong;
 }
-section a:hover {
-  text-decoration: none;
+
+pre {
+  overflow: hidden;
+  border-radius: 0.25em;
+  border: 2px solid #0e1013;
+  background: var(--color-background-code) !important;
+  padding: 0.4em 0.6em;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+}
+pre code {
+  height: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+  border-radius: unset;
+  border: unset;
+  color: #c0c5ce !important;
+  padding: unset;
+}
+
+code {
+  border-radius: 0.25em;
+  border: 2px solid #0e1013;
+  color: var(--color-inlinecode) !important;
+  overflow-wrap: break-word;
 }

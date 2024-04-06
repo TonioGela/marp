@@ -1,71 +1,62 @@
-# Marp Presentations Template
+# TonioGela's Marp Slides Template
+
+Slides template to use with [marp-cli], a handy Markdown to Slides tool
 
 ![example](./images/example.png)
 
-## Prerequisites
-On MacOsX
-```
-brew install marp-cli
-(Optionally)
-brew install sass/sass/sass
-brew install just
-brew install monolith
-```
-
-On Linux
-```
-npm install -g @marp-team/marp-cli
-(Optionally)
-npm install -g sass
-cargo install just
-cargo install monolith
-```
+### Prerequisites
+- [marp-cli](https://github.com/marp-team/marp-cli)
+- [sass] to modify and rebuild the theme (optional)
+- [just] to use the commands defined in the `justfile` (optional)
+- [monolith] to pack the whole presentation in a single html file (optional)
 
 ## Instructions
-This template requires [marp](https://marp.app/) to be installed to be built.
-`npm install -g @marp-team/marp-cli` or `brew install marp-cli`
 
-The file `toniogela.scss` should be compiled to css using [sass](https://sass-lang.com/install) with `sass --no-source-map toniogela.scss:toniogela.css`.
-The repository already contains compiled version for ease. The theme contains just a few overrides over the default [uncover](https://github.com/marp-team/marp-core/blob/main/themes/uncover.scss) theme, that is heavily inspired by [reveal.js](https://revealjs.com/), tool that I often use in its [reveal-md](https://github.com/webpro/reveal-md) form.
+To write your presentation, create a repository using this template and fill the `slides.md` file with your content. You may want to take a look at the [Marpit Markdown](https://marpit.marp.app/markdown) features.
 
-You can build the presentation using `marp --html true --theme-set ./theme/toniogela.css -- slides.md`.
+The deck of slides can then be built with:
+- `marp --html true --theme-set ./theme/toniogela.css -- slides.md`
+- `marp slides.md` (since there's a `.marprc.yml` file)
+- `just build` (if you have installed `just`)
 
-### justfile
-The repository contains a `justfile` for [just](https://github.com/casey/just). You can see the list of recipres using `just --list`, but the idea is that you can build the presentation using `just build`
+## Deploy your slides with GH Actions
 
-## Customization
+//TODO!
 
-[slides.md](./slides.md) and [toniogela.scss](./theme/toniogela.scss) should contain all customization instructions
+## Customising the theme
+[slides.md](./slides.md) and [toniogela.scss](./theme/toniogela.scss) should contain all customization instructions. The theme consists of just a few overrides over the default [uncover](https://github.com/marp-team/marp-core/blob/main/themes/uncover.scss) theme and customises the code highlight.
 
-### Graphs
-Cool graphs can be drawn using [Asciiflow](https://asciiflow.com/#/) and [converted to images](https://shaky.github.bushong.net/)
+The file `toniogela.scss` should be compiled to css using [sass](https://sass-lang.com/install) with `sass --no-source-map toniogela.scss:toniogela.css` or `just theme`.
+
+The repository already contains compiled version for ease.
+
+## justfile
+The repository contains a `justfile` to use with [just]. You can see the list of recipes running `just`, but the idea is that you can build the presentation using `just build`, bundle it using `just bundle`, get a pdf deckset using `just pdf` and so on.
+
+I encourage you [to take a look at it](./justfile) because maintaining this file is easier than keeping this `README.md` updated.
 
 ## Bundling
-To bundle the whole presentation as a file you can use [monolith](https://github.com/Y2Z/monolith) (or `just deploy` if you're using just).
+To bundle the whole presentation as a single html file you can use [monolith] running `monolith slides.html --silent --output index.html ` or `just bundle`.
 
-Sadly marp generates some selectors that are using a CSS hack for IE 9 that monolith doesn't detect (see [here](https://github.com/Y2Z/monolith/issues/258) for info) so it's necessary to use `sed` to modify the output file.
+## Graphs
+Cool graphs can be drawn using [Asciiflow] and then [converted to images](https://shaky.github.bushong.net/).
 
-The syntax for sed in-place is `sed -i 's/<x>/<y>/g' <file>` on linux while `sed -i '' 's/<x>/<y>/g' <file>` on MacOsX. In the justfile you find `sed -i 's/:not()/:not(\\9)/g' index.html` since I personally aliased `gsed` installable via `brew install gnu-sed` to `sed`.
+## VSCode Plugin
+To use [the preview feature of VSCode](https://github.com/marp-team/marp-vscode#preview-marp-markdown) install the [VSCode Marp plugin](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode) and set the following properties:
 
-## Vscode
-
-To use [the preview feature of vscode](https://github.com/marp-team/marp-vscode#preview-marp-markdown) set the following properties:
 ```
-"markdown.marp.themes": ["./theme/toniogela.css"],
-"markdown.marp.enableHtml": true
+"markdown.marp.enableHtml": true,
+"markdown.marp.themes": ["./theme/toniogela.css"]
 ```
-
-note that a `.vscode/settings.json` is committed in the repo for ease.
+note that a [settings.json](.vscode/settings.json) is committed into the repo for ease.
 
 ## Other
-
 The [Marp Github discussions](https://github.com/marp-team/marp/discussions) are the best place for info.
 
-For the list of emojis see [here](https://github.com/markdown-it/markdown-it-emoji/blob/2.0.0/lib/data/full.json)
+For the list of emojis see [here](https://github.com/markdown-it/markdown-it-emoji/blob/3.0.0/lib/data/full.mjs)
 
-For a comparison with Deckset see [here](https://github.com/marp-team/marp/discussions/68)
-
-# TODO (Contributors are welcome)
-Add CI and autodeploy on Netlify, maybe using [action-netlify-deploy](https://github.com/South-Paw/action-netlify-deploy#deploying-drafts-on-each-commit-and-publishing-on-push-to-master)
-
-[Runners](https://github.com/TonioGela/base.g8/settings/actions/runners) are a good fit? Probably not but [Custom Docker Images](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action)? Maybe built with [this rationale](https://www.lpalmieri.com/posts/fast-rust-docker-builds/) i.e. keeping the image as small as possible?
+[marp-cli]: https://github.com/marp-team/marp-cli
+[monolith]: https://github.com/Y2Z/monolith
+[Asciiflow]: https://asciiflow.com/#/
+[just]: https://github.com/casey/just
+[sass]: https://sass-lang.com/install

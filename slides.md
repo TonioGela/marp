@@ -1,9 +1,13 @@
 ---
 marp: true
-theme: toniogela
-paginate: true
-class: invert
 size: 16:9
+theme: toniogela
+class: invert
+author: Antonio Gelameris
+description: Example slides set with my theme
+url: https://marp.toniogela.dev/
+paginate: false
+math: mathjax
 ---
 
 <style>
@@ -71,11 +75,13 @@ $$
 
 ---
 
-![bg left fill blur:3px](images/editors.png)
+![bg left fit blur:1px](images/editors.png)
+
+Images can `fit` or `fill` a side of the screen
 
 :drum:
-* prima io
-* poi io
+* first me
+* than me
 
 ---
 

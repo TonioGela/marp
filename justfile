@@ -2,22 +2,22 @@
 default:
   @just --list --unsorted
 
-# build presentation
+# builds the presentation
 build:
-    marp --html true --theme-set ./theme/toniogela.css -- slides.md
-# build presentation as pdf
-pdf:
-    marp --html true --theme-set ./theme/toniogela.css --pdf --allow-local-files -- slides.md
+    marp slides.md
 
-# build theme (useful if scss gets changed)
+# builds the presentation as pdf (requires Chrome or Edge)
+pdf:
+    marp --pdf -- slides.md
+
+# builds the theme from scss (useful if scss gets changed)
 theme:
     sass --no-source-map theme/toniogela.scss:theme/toniogela.css
 
-# removes temp files
+# removes temp build files
 clean:
     rm -f slides.html index.html
 
-# creates a single self contained index.html file
-deploy: build
-    monolith slides.html -o index.html &> /dev/null
-    @sed -i 's/:not()/:not(\\9)/g' index.html
+# creates a single self-contained easy-to-deploy index.html file
+bundle: build
+    monolith slides.html --silent --output index.html 

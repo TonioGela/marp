@@ -1,6 +1,6 @@
 # TonioGela's Marp Slides Template
 
-Slides template and them to be used with [marp-cli], a handy "Markdown to slides" tool that features a presenter's view.
+Slides template and theme to be used with [marp-cli], a handy "Markdown to slides" tool that features a presenter's view.
 
 This theme reflects the one built for [my blog](https://toniogela.dev).
 
@@ -66,6 +66,13 @@ note that a [settings.json](.vscode/settings.json) is committed into the repo fo
 The [Marp Github discussions](https://github.com/marp-team/marp/discussions) are really useful in case of doubts.
 
 A list of supported emojis can be found [here](https://github.com/markdown-it/markdown-it-emoji/blob/3.0.0/lib/data/full.mjs).
+
+To concatenate the first two slides I used imagemagick:
+```
+marp --images png -- slides.md
+montage slides.001.png slides.002.png -tile x1 -geometry +50+0 -background transparent final.png
+magick final.png -trim final.png
+```
 
 [marp-cli]: https://github.com/marp-team/marp-cli
 [monolith]: https://github.com/Y2Z/monolith

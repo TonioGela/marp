@@ -6,6 +6,10 @@ default:
 build:
     marp slides.md
 
+# builds, watches for changes and opens a live preview window
+preview:
+    marp --preview slides.md
+
 # builds the presentation as pdf (requires Chrome or Edge)
 pdf:
     marp --pdf -- slides.md

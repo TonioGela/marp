@@ -31,7 +31,7 @@ A custom GH action to easily deploy the deckset is included.
 
 This action is built to support a single `slides.md` file and a single `images` folder as the only sources for the presentation. It should be difficult to customise if you have different needs.
 
-Once the repository gets created wait for the CI to complete at least once and then under [Settings > Pages](/settings/pages) select `Deploy from a Branch` under `Source` and pick the newly created `gh-pages` `/(root)`.
+Once the repository gets created wait for the CI to complete at least once and then under `Settings > Pages` select `Deploy from a Branch` under `Source` and pick the newly created `gh-pages` `/(root)`.
 
 If you're using a custom domain you'll need to modify the [cname in the workflow file](./.github/workflows/pages.yml#L41) and setup a corresponding `CNAME` DNS record on your domain to point to `<your-username>.github.io`.
 
@@ -66,6 +66,8 @@ note that a [settings.json](.vscode/settings.json) is committed into the repo fo
 The [Marp Github discussions](https://github.com/marp-team/marp/discussions) are really useful in case of doubts.
 
 A list of supported emojis can be found [here](https://github.com/markdown-it/markdown-it-emoji/blob/3.0.0/lib/data/full.mjs).
+
+---
 
 To concatenate the first two slides I used imagemagick:
 ```

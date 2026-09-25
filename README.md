@@ -9,8 +9,9 @@ This theme reflects the one built for [my blog](https://toniogela.dev).
 ### Prerequisites
 - [marp-cli](https://github.com/marp-team/marp-cli)
 - [sass] to modify and rebuild the theme (optional)
-- [just] to use the commands defined in the `justfile` (optional)
 - [monolith] to pack the whole presentation in a single html file (optional)
+
+Or just [nix]: `nix-shell` drops you in a shell with all three of them, plus the helper commands defined in [shell.nix](./shell.nix).
 
 ## Instructions
 
@@ -23,32 +24,30 @@ You may want to take a look at the many [Marpit Markdown](https://marpit.marp.ap
 The deck of slides can then be built with:
 - `marp --html true --theme-set ./theme/toniogela.css -- slides.md`
 - `marp slides.md` (since there's a `.marprc.yml` file)
-- `just build` (if you have installed `just`)
+- `build` (inside `nix-shell`)
 
 ## Deploy your slides with GH Actions
 
-A custom GH action to easily deploy the deckset is included.
+A GH action that builds the deckset with [nix] and deploys it to [Cloudflare Workers] is included.
 
-This action is built to support a single `slides.md` file and a single `images` folder as the only sources for the presentation. It should be difficult to customise if you have different needs.
+It is built to support a single `slides.md` file and a single `images` folder as the only sources for the presentation. It should be difficult to customise if you have different needs.
 
-Once the repository gets created wait for the CI to complete at least once and then under `Settings > Pages` select `Deploy from a Branch` under `Source` and pick the newly created `gh-pages` `/(root)`.
-
-If you're using a custom domain you'll need to modify the [cname in the workflow file](./.github/workflows/pages.yml#L41) and setup a corresponding `CNAME` DNS record on your domain to point to `<your-username>.github.io`.
+`nix-build` produces the whole thing: `public/` with the slides, the images and a `_headers` file, plus the `wrangler.jsonc` that deploys it. To point it at your own domain, edit the `name` and the `routes` pattern in [default.nix](./default.nix), and add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to the repository secrets.
 
 ## Customising the theme
 [slides.md](./slides.md) and [toniogela.scss](./theme/toniogela.scss) should contain all customization instructions. The theme consists of just a few overrides over the default [uncover](https://github.com/marp-team/marp-core/blob/main/themes/uncover.scss) theme and customises the code highlight.
 
-The file `toniogela.scss` should be compiled to css using [sass](https://sass-lang.com/install) with `sass --no-source-map toniogela.scss:toniogela.css` or `just theme`.
+The file `toniogela.scss` should be compiled to css using [sass](https://sass-lang.com/install) with `sass --no-source-map toniogela.scss:toniogela.css` or the `theme` command.
 
 The repository already contains compiled version for ease.
 
-## justfile
-The repository contains a `justfile` to use with [just]. You can see the list of recipes running `just`, but the idea is that you can build the presentation using `just build`, bundle it using `just bundle`, get a pdf deckset using `just pdf` and so on.
+## Commands
+`nix-shell` puts a handful of commands on your `PATH` and prints the list on entry: `build` the presentation, `bundle` it into a single html file, get a `pdf` deckset, rebuild the `theme`, `preview` with live reload and `clean` up.
 
-I encourage you [to take a look at it](./justfile) because maintaining this file is easier than keeping this `README.md` updated.
+I encourage you [to take a look at them](./shell.nix) because maintaining that file is easier than keeping this `README.md` updated.
 
 ## Bundling
-To bundle the whole presentation as a single html file you can use [monolith] running `monolith slides.html --silent --output index.html ` or `just bundle`.
+To bundle the whole presentation as a single html file you can use [monolith] running `monolith slides.html --silent --output index.html ` or the `bundle` command.
 
 ## Graphs
 Cool graphs can be drawn using [Asciiflow] and then [converted to images](https://shaky.github.bushong.net/).
@@ -79,5 +78,6 @@ magick final.png -trim final.png
 [marp-cli]: https://github.com/marp-team/marp-cli
 [monolith]: https://github.com/Y2Z/monolith
 [Asciiflow]: https://asciiflow.com/#/
-[just]: https://github.com/casey/just
 [sass]: https://sass-lang.com/install
+[nix]: https://nixos.org/download/
+[Cloudflare Workers]: https://developers.cloudflare.com/workers/static-assets/
